@@ -8,37 +8,38 @@ Sistema desenvolvido em Python para praticar conceitos de Banco de Dados Relacio
 
 Este projeto foi criado com o objetivo de consolidar conhecimentos em:
 
-Python
-SQLite
-Modelagem de Banco de Dados
-Relacionamentos entre tabelas (1:N)
-Consultas SQL com JOIN
-Organização de projetos em módulos
+* Python
+* SQLite
+* Modelagem de Banco de Dados
+* Relacionamentos entre tabelas (1:N)
+* Consultas SQL com JOIN
+* Organização de projetos em módulos
 
 ---
 
 ## 🚀 Funcionalidades
 
-Cadastro de usuários
-Criação de pedidos
-Associação de pedidos aos usuários
-Adição de produtos aos pedidos
-Consulta de pedidos utilizando JOIN
-Persistência de dados em SQLite
+* Cadastro de usuários
+* Criação de pedidos
+* Associação de pedidos aos usuários
+* Adição de produtos aos pedidos
+* Consulta de pedidos utilizando JOIN
+* Persistência de dados em SQLite
 
 ---
 
 ## 🛠️ Tecnologias utilizadas
 
-Python 3
-SQLite
-SQL
-Git e GitHub
+* Python 3
+* SQLite
+* SQL
+* Git e GitHub
 
 ---
 
 ## 📂 Estrutura do projeto
 
+```text
 Sistema de Pedidos
 │
 ├── dados/
@@ -53,13 +54,13 @@ Sistema de Pedidos
 │   └── __init__.py
 │
 └── main.py
-
+```
 ---
 
 ## 🗄️ Modelo de Banco de Dados
 
 O projeto utiliza três tabelas relacionadas:
-
+```text
 Usuários
     │
     │ 1:N
@@ -69,25 +70,25 @@ Pedidos
     │ 1:N
     ▼
 Itens do Pedido
-
+```
 Esse modelo representa um cenário comum em sistemas de vendas, onde:
 
-Um usuário pode possuir vários pedidos.
-Um pedido pode conter vários produtos.
+* Um usuário pode possuir vários pedidos.
+* Um pedido pode conter vários produtos.
 
 ---
 
 ## 📚 Conceitos praticados
 
-CRUD
-Relacionamentos entre tabelas
-Chaves Primárias e Estrangeiras
-INNER JOIN
-INSERT
-SELECT
-Organização em módulos
-Funções reutilizáveis
-Context Manager (with)
+* CRUD
+* Relacionamentos entre tabelas
+* Chaves Primárias e Estrangeiras
+* INNER JOIN
+* INSERT
+* SELECT
+* Organização em módulos
+* Funções reutilizáveis
+* Context Manager (with)
 
 ---
 
@@ -97,14 +98,14 @@ Este projeto continuará evoluindo durante meus estudos em Desenvolvimento Back-
 
 Planejo implementar:
 
-CRUD completo (Atualizar e Excluir)
-Validação de dados
-Tratamento de exceções
-Cadastro de produtos em tabela própria
-Interface gráfica com Tkinter
-API REST utilizando Flask ou FastAPI
-Migração do SQLite para MySQL ou PostgreSQL
-Utilização do SQLAlchemy
+* CRUD completo (Atualizar e Excluir)
+* Validação de dados
+* Tratamento de exceções
+* Cadastro de produtos em tabela própria
+* Interface gráfica com Tkinter
+* API REST utilizando Flask ou FastAPI
+* Migração do SQLite para MySQL ou PostgreSQL
+* Utilização do SQLAlchemy
 
 ---
 
