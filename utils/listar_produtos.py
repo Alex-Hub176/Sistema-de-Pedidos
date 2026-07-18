@@ -1,5 +1,5 @@
 from utils.database import conectar
-
+from sqlite3 import Error, IntegrityError, OperationalError
 
 def listar_pedido():
     query = ('''
@@ -19,11 +19,18 @@ def listar_pedido():
     
     with conectar() as con:
         cur = con.cursor()
-        cur.execute(query)
+        try:
+            cur.execute(query)
+            todos_dados = cur.fetchall()
+            return todos_dados
+        
+        except IntegrityError:
+            print("Os dados informados violam uma regra do banco.")
+        except OperationalError:
+            print("Erro ao acessar o banco de dados.")
+        except Error as erro:
+            print(f"Erro SQLite: {erro}")
 
-
-    todos_dados = cur.fetchall()
-    return todos_dados
     
 
 
