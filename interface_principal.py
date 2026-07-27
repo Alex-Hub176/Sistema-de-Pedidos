@@ -5,7 +5,7 @@ from utils.atualizar_interface import atualizar_treeview
 def iniciar_sistema():
     janela = tk.Tk()
     janela.title("Projeto Portfólio - Sistema de Pedidos")
-    janela.geometry("800x400")
+    janela.geometry("900x600")
 
     colunas = ("clientes", "id_pedido", "produto", "quantidade", "total")
 
@@ -27,3 +27,5 @@ def iniciar_sistema():
     atualizar_treeview(tabela)
 
     janela.mainloop()
+
+
