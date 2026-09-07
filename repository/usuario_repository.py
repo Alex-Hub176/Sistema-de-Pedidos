@@ -1,14 +1,15 @@
 from models.usuarios import Usuario
 from database.conexao import conectar
+from repository.repository_base import RepositoryBase
 
-class UsuarioRepository(Usuario):
+class UsuarioRepository(RepositoryBase):
     CAMPOS_PERMITIDOS = ["id" ,"nome", "email", "telefone"]
     
    
     def inserir(self, usuario: Usuario):
         with conectar() as conexao:
             cursor = conexao.cursor()
-            cursor.execute("INSERT INTO usuarios (nome, email, telefone) VALUES (?,?,?)", (self.nome, self.email, self.telefone))
+            cursor.execute("INSERT INTO usuarios (nome, email, telefone) VALUES (?,?,?)", (usuario.nome, usuario.email, usuario.telefone))
             conexao.commit()
 
     def atualizar(self, id, campo, novo_valor):
@@ -22,5 +23,9 @@ class UsuarioRepository(Usuario):
             cursor.execute(query, (novo_valor, id))
             conexao.commit()
 
-        def deletar(self, campo, id,):
-            pass
+    def deletar(self, id):
+        return super().deletar(id)
+
+    def consultar(self, id):
+        return super().consultar(id)
+    
