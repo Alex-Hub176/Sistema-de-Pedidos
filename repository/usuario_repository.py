@@ -9,7 +9,7 @@ class UsuarioRepository(RepositoryBase):
     def inserir(self, usuario: Usuario):
         with conectar() as conexao:
             cursor = conexao.cursor()
-            cursor.execute("INSERT INTO usuarios (nome, email, telefone) VALUES (?,?,?)", (usuario.nome, usuario.email, usuario.telefone))
+            cursor.execute("INSERT INTO usuarios (nome, email, telefone) VALUES (%s,%s,%s)", (usuario.nome, usuario.email, usuario.telefone))
             conexao.commit()
 
     def atualizar(self, id, campo, novo_valor):
