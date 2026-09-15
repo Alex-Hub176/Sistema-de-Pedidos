@@ -13,19 +13,25 @@ class UsuarioRepository(RepositoryBase):
             conexao.commit()
 
     def atualizar(self, id, campo, novo_valor):
-        if campo not in self.CAMPOS_PERMITIDOS:
+        if campo not in UsuarioRepository.CAMPOS_PERMITIDOS:
             print("Campo inválido")
             return
         
-        query = f"UPDATE usuario SET {campo} = ? WHERE id = ?"
-        with conectar as conexao:
+        query = f"UPDATE usuarios SET {campo} = %s WHERE id = %s"
+        with conectar() as conexao:
             cursor = conexao.cursor()
             cursor.execute(query, (novo_valor, id))
             conexao.commit()
 
     def deletar(self, id):
-        return super().deletar(id)
+        with conectar() as conexao:
+            cursor = conexao.cursor()
+            cursor.execute("DELETE FROM usuarios WHERE id = %s", (id,))
+            conexao.commit()
 
     def consultar(self, id):
-        return super().consultar(id)
-    
+        with conectar() as conexao:
+            cursor = conexao.cursor()
+            cursor.execute("SELECT * FROM usuarios WHERE id = %s", (id,))
+            user = cursor.fetchall()
+            print(user)
