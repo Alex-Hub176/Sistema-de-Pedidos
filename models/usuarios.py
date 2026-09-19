@@ -1,5 +1,4 @@
-from abc import ABC
-class Usuario(ABC):    
+class Usuario:    
     def __init__(self, id, nome, email, telefone):
         self.id = id
         self.nome = nome
