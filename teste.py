@@ -1,7 +1,6 @@
-from repository.produtos_repository import ProdutoRepository
-from models.produtos import Produtos
+from repository.pedidos_repository import PedidoRepository
+from models.pedidos import Pedidos
 
-repo = ProdutoRepository()
-pro1 = Produtos("Calça Jeans", 79, 100)
-ult = repo.consultar(3)
-print(ult)
+repo = PedidoRepository()
+#pro1 = Pedidos(1, 'pendente')
+print(repo.consultar(3))
