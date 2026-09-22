@@ -1,0 +1,4 @@
+from .pedidos_repository import PedidoRepository
+from .usuario_repository import UsuarioRepository
+from .produtos_repository import ProdutoRepository
+from .pedidos_itens_repository import PedidoItensRepository

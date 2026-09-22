@@ -4,13 +4,17 @@ from repository.repository_base import RepositoryBase
 
 class UsuarioRepository(RepositoryBase):
     CAMPOS_PERMITIDOS = ["id" ,"nome", "email", "telefone"]
-    
-   
+
     def inserir(self, usuario: Usuario):
         with conectar() as conexao:
             cursor = conexao.cursor()
-            cursor.execute("INSERT INTO usuarios (nome, email, telefone) VALUES (%s,%s,%s)", (usuario.nome, usuario.email, usuario.telefone))
+            cursor.execute(
+                "INSERT INTO usuarios (nome, email, telefone) VALUES (%s,%s,%s) RETURNING id", (usuario.nome, usuario.email, usuario.telefone)
+            )
+            usuario_id = cursor.fetchone()[0]
             conexao.commit()
+        return usuario_id
+
 
     def atualizar(self, id, campo, novo_valor):
         if campo not in UsuarioRepository.CAMPOS_PERMITIDOS:
@@ -23,11 +27,13 @@ class UsuarioRepository(RepositoryBase):
             cursor.execute(query, (novo_valor, id))
             conexao.commit()
 
+
     def deletar(self, id):
         with conectar() as conexao:
             cursor = conexao.cursor()
             cursor.execute("DELETE FROM usuarios WHERE id = %s", (id,))
             conexao.commit()
+
 
     def consultar(self, id):
         with conectar() as conexao:

@@ -7,8 +7,12 @@ class PedidoRepository(RepositoryBase):
     def inserir(self, pedidos: Pedidos):
         with conectar() as conexao:
             cursor = conexao.cursor()
-            cursor.execute("INSERT INTO pedidos (usuario_id, status) VALUES (%s, %s)", (pedidos.usuario_id, pedidos.status))
+            cursor.execute(
+                "INSERT INTO pedidos (usuario_id, status) VALUES (%s, %s) RETURNING id", (pedidos.usuario_id, pedidos.status)
+            )
+            pedido_id = cursor.fetchone()[0]
             conexao.commit()
+        return pedido_id
 
     def atualizar(self, campo, id, valor):
         query = f"UPDATE SET pedidos {campo} = %s WHERE id = %s"
