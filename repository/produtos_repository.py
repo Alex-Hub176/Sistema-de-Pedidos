@@ -28,4 +28,5 @@ class ProdutoRepository(RepositoryBase):
             cursor = conexao.cursor()
             cursor.execute("SELECT * FROM produtos WHERE id = %s", (id,))
             produto = cursor.fetchall()
-            return produto
+            
+        return produto
