@@ -37,6 +37,9 @@ def validar_id(id):
 
 
 def validar_telefone(telefone):
+    if not isinstance(telefone, str):
+        telefone = str(telefone)
+        
     numeros = "".join(c for c in telefone if c.isdigit())
     if len(numeros) not in (10, 11):
         raise ValueError("Telefone inválido")
