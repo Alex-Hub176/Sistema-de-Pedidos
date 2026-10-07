@@ -29,21 +29,21 @@ Preparar a base para estudos futuros de APIs REST.
 
 ## 🚀 Funcionalidades
 
-👤 Usuários
+### 👤 Usuários
 Cadastro de usuários;
 Atualização de dados;
 Exclusão de usuários;
 Consulta por ID;
 Validação de nome, e-mail, telefone e ID.
 
-📦 Produtos
+### 📦 Produtos
 Cadastro de produtos;
 Atualização de produtos;
 Exclusão de produtos;
 Consulta por ID;
 Validação de nome, preço, quantidade e ID.
 
-🧾 Pedidos
+### 🧾 Pedidos
 
 A estrutura de pedidos já está sendo construída, incluindo:
 
@@ -52,7 +52,7 @@ Associação do pedido a um usuário;
 Controle de status;
 Estrutura para os itens do pedido.
 
-🛒 Itens do pedido
+### 🛒 Itens do pedido
 
 Foi criada a entidade intermediária pedido_itens, responsável por relacionar:
 
@@ -74,7 +74,7 @@ Linguagens e ferramentas
 * Git 
 * GitHub
 
-Bibliotecas
+### Bibliotecas
 
 * psycopg — conexão com PostgreSQL;
 * python-dotenv — gerenciamento de variáveis de ambiente;
@@ -192,7 +192,7 @@ Um usuário pode possuir vários pedidos, e um pedido pode possuir vários itens
 
 O projeto continuará evoluindo conforme novos conceitos forem estudados.
 
-# Organização e Back-end
+### Organização e Back-end
 
 * Finalizar PedidoService;
 * Padronizar o retorno dos Services;
@@ -200,20 +200,20 @@ O projeto continuará evoluindo conforme novos conceitos forem estudados.
 * Melhorar as validações;
 * Revisar consultas SQL.
 
-# Testes
+### Testes
 
 * Criar testes automatizados;
 * Testar Services;
 * Testar validações;
 * Testar operações dos Repositories.
 
-# Interface e API
+### Interface e API
 
 * Melhorar a interface gráfica;
 * Integrar completamente a interface com os Services;
 * Criar uma API REST;
 
-# Banco de dados
+### Banco de dados
 * Melhorar a modelagem;
 * Revisar relacionamentos;
 * Melhorar o gerenciamento das configurações do banco.
@@ -242,24 +242,24 @@ Este projeto representa, portanto, não apenas um sistema de pedidos, mas també
 
 ## ▶️ Como executar o projeto
 
-# 1. Clone o repositório
+### 1. Clone o repositório
 git clone https://github.com/Alex-Hub176/Sistema-de-Pedidos.git
 
 Entre na pasta:
 
 cd Sistema-de-Pedidos
 
-# 2. Crie um ambiente virtual
+### 2. Crie um ambiente virtual
 python -m venv .venv
 Linux/macOS
 source .venv/bin/activate
 Windows
 .venv\Scripts\activate
 
-# 3. Instale as dependências
+### 3. Instale as dependências
 pip install psycopg python-dotenv
 
-# 4. Configure as variáveis de ambiente
+### 4. Configure as variáveis de ambiente
 
 Crie um arquivo .env na raiz do projeto:
 
@@ -271,13 +271,13 @@ DB_PASSWORD=sua_senha
 
 ⚠️ Importante: nunca envie o arquivo .env para o GitHub. As credenciais do banco devem permanecer fora do código-fonte.
 
-# 5. Configure o PostgreSQL
+### 5. Configure o PostgreSQL
 
 Certifique-se de que o PostgreSQL esteja instalado e em execução.
 
 Crie o banco de dados utilizado pelo projeto e configure as respectivas credenciais no arquivo .env.
 
-# 6. Execute o projeto
+### 6. Execute o projeto
 
 A entrada principal atual está em:
 
