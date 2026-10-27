@@ -7,10 +7,10 @@ class ProdutoRepository(RepositoryBase):
     def inserir(self, produtos: Produtos):
         with conectar() as conexao:
             cursor = conexao.cursor()
-            cursor.execute("INSERT INTO produtos (nome, preco, quantidade) VALUES (%s,%s,%s)",  (produtos.nome_produto, produtos.preco, produtos.qtd))
+            cursor.execute("INSERT INTO produtos (nome, preco, estoque) VALUES (%s,%s,%s)",  (produtos.nome_produto, produtos.preco, produtos.qtd))
             conexao.commit()
 
-    def atualizar(self, id, campo, novo_valor):
+    def atualizar(self, campo, id, novo_valor):
         query = f"UPDATE produtos SET {campo} = %s WHERE id = %s"
         with conectar() as conexao:
             cursor = conexao.cursor()
@@ -30,3 +30,21 @@ class ProdutoRepository(RepositoryBase):
             produto = cursor.fetchall()
             
         return produto
+
+    def consultar_preco(self, id, cursor=None):
+        query = "SELECT preco FROM produtos WHERE id = %s"
+
+        if cursor is not None:
+            cursor.execute(query, (id,))
+            linha = cursor.fetchone()
+
+        else:
+            with conectar() as conexao:
+                cursor_local = conexao.cursor()
+                cursor_local.execute(query, (id,))
+                linha = cursor_local.fetchone()
+
+        if linha is None:
+            return None
+
+        return linha[0]
