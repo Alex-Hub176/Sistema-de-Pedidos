@@ -28,7 +28,7 @@ class PedidoService:
 
             for produto_id, quantidade in itens:
                 validar_id(produto_id)
-                validar_quantidade(quantidade)
+                validar_quantidade_item(quantidade)
 
                 preco = self.produto_repository.consultar_preco(produto_id, cursor)
 
@@ -40,15 +40,18 @@ class PedidoService:
                 
         return pedido_id
 
-    def atualizar_pedido(self, id, novo_status):
+
+    def atualizar_status(self, id, novo_status):
         validar_id(id)
-        #validar_status(novo_status) a fazer ainda!
+        validar_status(novo_status)
 
         self.pedido_repository.atualizar("status", id, novo_status)
+
 
     def deletar_pedido(self, id):
         validar_id(id)
         self.pedido_repository.deletar(id)
+
 
     def consultar_pedidos(self, id):
         validar_id(id)
