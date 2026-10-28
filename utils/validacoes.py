@@ -14,6 +14,14 @@ def validar_quantidade(qtd):
    return qtd
 
 
+def validar_quantidade_item(qtd):
+    if not isinstance(qtd, int):
+        raise TypeError("Quantidade deve ser um número inteiro")
+    if qtd < 1:
+        raise ValueError("A quantidade do item deve ser pelo menos 1.")
+    return qtd
+
+
 def validar_email(email: str):
     if not isinstance(email, str) or "@" not in email or "." not in email:
         raise TypeError("Email inválido")
@@ -31,9 +39,16 @@ def validar_nome(nome):
 def validar_id(id):
     if not isinstance(id, int):
         raise TypeError("Id deve ser um número inteiro")
-    if id < 0:
-        raise ValueError("O id não pode ser um número negativo")
+    if id <= 0:
+        raise ValueError("O id deve ser maior que zero.")
     return id
+
+
+def validar_status(status):
+    STATUS_VALIDOS = ("pendente", "pago", "cancelado")
+    if status not in STATUS_VALIDOS:
+        raise ValueError(f"Status inválido. Use um destes: {', '.join(STATUS_VALIDOS)}")
+    return status
 
 
 def validar_telefone(telefone):
