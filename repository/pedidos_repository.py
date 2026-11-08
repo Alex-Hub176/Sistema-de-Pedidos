@@ -29,6 +29,7 @@ class PedidoRepository(RepositoryBase):
         with conectar() as conexao:
             cursor = conexao.cursor()
             cursor.execute("DELETE FROM pedidos WHERE id = %s", (id,))
+            return cursor.rowcount
 
     def consultar(self, id):
         with conectar() as conexao:

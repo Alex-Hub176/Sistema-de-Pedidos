@@ -3,41 +3,39 @@ from database.conexao import conectar
 from repository.repository_base import RepositoryBase
 
 class UsuarioRepository(RepositoryBase):
-    CAMPOS_PERMITIDOS = ["id" ,"nome", "email", "telefone"]
 
-    def inserir(self, usuario: Usuario):
+    def inserir(self, usuario: Usuario, cursor=None):
+        script = "INSERT INTO usuarios (nome, email, telefone) VALUES (%s,%s,%s) RETURNING id"
+        valores = (usuario.nome, usuario.email, usuario.telefone)
+
+        if cursor is not None:
+            cursor.execute(script, valores)
+            return cursor.fetchone()[0]
+
         with conectar() as conexao:
-            cursor = conexao.cursor()
-            cursor.execute(
-                "INSERT INTO usuarios (nome, email, telefone) VALUES (%s,%s,%s) RETURNING id", (usuario.nome, usuario.email, usuario.telefone)
-            )
-            usuario_id = cursor.fetchone()[0]
-            conexao.commit()
-        return usuario_id
+            cursor_local = conexao.cursor()
+            cursor_local.execute(script, valores)
+            return cursor_local.fetchone()[0]
 
-
+            
     def atualizar(self, id, campo, novo_valor):
-        if campo not in UsuarioRepository.CAMPOS_PERMITIDOS:
-            print("Campo inválido")
-            return
-        
-        query = f"UPDATE usuarios SET {campo} = %s WHERE id = %s"
+        query = f"UPDATE usuarios SET {campo} = %s WHERE id = %s RETURNING id"
         with conectar() as conexao:
             cursor = conexao.cursor()
             cursor.execute(query, (novo_valor, id))
-            conexao.commit()
-
+            return cursor.fetchone() is not None
+        
 
     def deletar(self, id):
         with conectar() as conexao:
             cursor = conexao.cursor()
             cursor.execute("DELETE FROM usuarios WHERE id = %s", (id,))
-            conexao.commit()
-
+            return cursor.rowcount
+            
 
     def consultar(self, id):
         with conectar() as conexao:
             cursor = conexao.cursor()
             cursor.execute("SELECT * FROM usuarios WHERE id = %s", (id,))
-            user = cursor.fetchall()
-            print(user)
+        return cursor.fetchall()
+        
