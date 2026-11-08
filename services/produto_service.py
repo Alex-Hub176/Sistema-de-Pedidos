@@ -28,12 +28,19 @@ class ProdutoService:
             validar_quantidade(novo_valor)
         validar_id(id)
 
-        self.produto_repository.atualizar(campo, id, novo_valor)
+        produto_atualizado = self.produto_repository.atualizar(campo, id, novo_valor)
+
+        if produto_atualizado == False:
+            return ValueError("Produto não existe")
+        return produto_atualizado
         
 
     def deletar_produto(self, id):
         validar_id(id)
-        self.produto_repository.deletar(id)
+        produto_apagado = self.produto_repository.deletar(id)
+        if produto_apagado == 0:
+            raise ValueError("Produto não encotrado")
+        return produto_apagado
 
     def consultar_produto(self, id):
         validar_id(id)

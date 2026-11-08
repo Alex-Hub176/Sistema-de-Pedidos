@@ -18,6 +18,7 @@ class UsuarioService:
         usuario_id = self.usuario_repository.inserir(novo_usuario)
         return usuario_id
 
+
     def atualizar_usuario(self, id, campo, novo_valor):
         if campo not in UsuarioService.CAMPOS_PERMITIDOS:
             raise AttributeError("Campo inválido")
@@ -29,14 +30,20 @@ class UsuarioService:
         elif campo == "email":
             validar_email(novo_valor)
         validar_id(id)
+        id_usuario = self.usuario_repository.atualizar(id, campo, novo_valor)
+        if id_usuario == False:
+            raise ValueError("Usuário não existe")
+        return id_usuario
 
-        self.usuario_repository.atualizar(id, campo, novo_valor)
 
     def deletar_usuario(self, id):
         validar_id(id)
-        self.usuario_repository.deletar(id)
+        usuarios_apagados = self.usuario_repository.deletar(id)
+        if usuarios_apagados == 0:
+            raise ValueError("Usuário não encontrado")
+        return usuarios_apagados
 
     
     def consutar_usuario(self,id):
         validar_id(id)
-        self.usuario_repository.consultar(id)
+        return self.usuario_repository.consultar(id)

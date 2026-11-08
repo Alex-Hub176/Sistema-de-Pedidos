@@ -44,13 +44,15 @@ class PedidoService:
     def atualizar_status(self, id, novo_status):
         validar_id(id)
         validar_status(novo_status)
-
         self.pedido_repository.atualizar("status", id, novo_status)
 
 
     def deletar_pedido(self, id):
-        validar_id(id)
-        self.pedido_repository.deletar(id)
+        validar_id(id)   
+        pedido_apagado = self.pedido_repository.deletar(id)
+        if pedido_apagado == 0:
+            raise ValueError("Pedido não encontrado")
+        return pedido_apagado
 
 
     def consultar_pedidos(self, id):
