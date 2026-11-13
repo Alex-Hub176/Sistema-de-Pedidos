@@ -10,7 +10,7 @@ class PedidoRepository(RepositoryBase):
 
         if cursor is not None:
             cursor.execute(script,valores)
-            return cursor.fetchone[0]
+            return cursor.fetchone()[0]
 
         with conectar() as conexao:
             cursor_local = conexao.cursor()
