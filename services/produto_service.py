@@ -1,21 +1,27 @@
 from models.produtos import Produtos
 from repository.produtos_repository import ProdutoRepository
 from utils.validacoes import *
+from database.conexao import conectar
+from utils.erros import tratar_erros_db
 
 class ProdutoService:
     CAMPOS_PERMITIDOS = ["nome", "preco", "estoque"]
 
     def __init__(self):
         self.produto_repository = ProdutoRepository()
-
+    @tratar_erros_db
     def inserir_produto(self, nome_produto, preco, estoque):
         validar_nome(nome_produto)
         validar_preco(preco)
         validar_quantidade(estoque)
 
-        novo_produto = Produtos(nome_produto, preco, estoque)
-        self.produto_repository.inserir(novo_produto)
+        with conectar() as conexao:
+            cursor = conexao.cursor()
+            novo_produto = Produtos(nome_produto, preco, estoque)
+        self.produto_repository.inserir(novo_produto, cursor)
 
+
+    @tratar_erros_db
     def atualizar_produto(self, id, campo, novo_valor):
         if campo not in ProdutoService.CAMPOS_PERMITIDOS:
             raise AttributeError("Campo inválido")
@@ -31,10 +37,11 @@ class ProdutoService:
         produto_atualizado = self.produto_repository.atualizar(campo, id, novo_valor)
 
         if produto_atualizado == False:
-            return ValueError("Produto não existe")
+            raise ValueError("Produto não existe")
         return produto_atualizado
-        
 
+        
+    @tratar_erros_db
     def deletar_produto(self, id):
         validar_id(id)
         produto_apagado = self.produto_repository.deletar(id)
@@ -42,6 +49,8 @@ class ProdutoService:
             raise ValueError("Produto não encotrado")
         return produto_apagado
 
+
+    @tratar_erros_db
     def consultar_produto(self, id):
         validar_id(id)
         return self.produto_repository.consultar(id)
