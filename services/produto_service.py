@@ -18,7 +18,8 @@ class ProdutoService:
         with conectar() as conexao:
             cursor = conexao.cursor()
             novo_produto = Produtos(nome_produto, preco, estoque)
-        self.produto_repository.inserir(novo_produto, cursor)
+            produto_inserido = self.produto_repository.inserir(novo_produto, cursor)
+        return produto_inserido
 
 
     @tratar_erros_db

@@ -18,7 +18,7 @@ class UsuarioService:
         with conectar() as conexao:
             cursor = conexao.cursor()
             novo_usuario = Usuario(None, nome, email, telefone)
-            usuario_id = self.usuario_repository.inserir(novo_usuario)
+            usuario_id = self.usuario_repository.inserir(novo_usuario, cursor)
         return usuario_id
 
 
