@@ -5,11 +5,12 @@ from database.conexao import conectar
 class ProdutoRepository(RepositoryBase):
 
     def inserir(self, produtos: Produtos, cursor=None):
-        script = "INSERT INTO produtos (nome, preco, estoque) VALUES (%s,%s,%s)"
+        script = "INSERT INTO produtos (nome, preco, estoque) VALUES (%s,%s,%s) RETURNING id, nome, estoque"
         valores = (produtos.nome_produto, produtos.preco, produtos.qtd)
 
         if cursor is not None:
             cursor.execute(script, valores)
+            return cursor.fetchone()[0]
 
         with conectar() as conexao:
             cursor_local = conexao.cursor()
